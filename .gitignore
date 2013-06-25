@@ -1,7 +1,0 @@
-*.pl
-local*
-OGAT/
-output/
-error*
-style.css
-README*
