@@ -1,0 +1,49 @@
+#!/usr/bin/perl -w
+
+# Use this script to test your perl installation.
+
+# Required extra libs for a fresh recent ActiveState Perl 5.10 install:
+#  ppm install DateTime
+#  ppm install Hash::Merge
+#  ppm install DBD::mysql
+
+
+use strict;
+use warnings;
+use 5.010_000;
+require 5.010_000;
+use feature ':5.10';
+package OGAT;
+use threads;
+use threads::shared;
+use Thread::Queue;
+use constant { false => 0, true  => 1 };
+require OGAT::functions;
+use OGAT::Mech;
+use OGAT::TimeStamp;
+require OGAT::prefs;
+require OGAT::defaults;
+use OGAT::FleetLogs;   ## Pushing, bashing, transports to inactives
+#use OGAT::UserDetails; ## IP CHECK stuff doesn't work yet
+use OGAT::Html;
+require OGAT::org;
+require OGAT::us;
+use DBI;
+use Carp ();
+use Hash::Merge;
+use DateTime;
+use List::Util qw( shuffle );
+use Config;
+use Thread::Semaphore;
+use Net::FTP;
+use utf8;
+use Digest::MD5 qw(md5_hex);
+#use Encode;
+use WWW::Mechanize;
+use URI::Escape;
+use File::Path;
+
+BEGIN {
+}
+
+say "\nIf there are no errors or warnings above, you're probably fine...";

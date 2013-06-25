@@ -1,0 +1,54 @@
+#!/usr/bin/perl -w
+##############################
+### CHECK PARAMETERS BELOW ###
+##############################
+#                            #
+#     version 2010/02/28     #
+#                            #
+### Put your server settings in localconfig.pm
+### Make sure defaults.pm, prefs.pm and your community-specific
+### configuration files exist in the OGAT subfolder.
+### Obviously, make sure you've read and configured OGAT/prefs.pm to your situation.
+use strict;
+use warnings;
+use 5.010_000;
+require 5.010_000;
+use feature ':5.10';
+package OGAT;
+# preferred run time: Sunday evening, a bit before the monday night cleaning of debris fields.
+# For localization, check all lines with # LOCALIZE
+
+my ($community, $uni) = @ARGV;
+if (defined $community and $community =~ /^\w+(?:\.\w+)*$/
+		and defined $uni and $uni =~ /^\d+$/ and $uni > 0) {
+	# ok, script can start, load stuff
+	use DBI;
+	use Carp ();
+	use Hash::Merge;
+	use constant { false => 0, true  => 1 };
+	require OGAT::functions;
+	use OGAT::Mech;
+	use OGAT::TimeStamp;
+	require OGAT::prefs; # edit this file to suit your personal settings and preferences
+	require OGAT::defaults; # this just removes a whole lot of clutter from here
+	# There's also a file for your community like OGAT::org for ogame.org
+	# Check that file for community-specific settings like translations, rule settings, ...
+	use OGAT::FleetLogs;   ## Pushing, bashing, transports to inactives
+	#use OGAT::UserDetails; ## IP CHECK stuff
+	use OGAT::Html;
+	eval "require OGAT::$community" or die log_("Cannot find community config OGAT::$community.pm");
+	use DateTime;
+
+
+	# and start script
+	my $result = do_stuff($community, $uni);
+	if ($result) { Carp::confess $result; } # big error likely
+	log_("Ended process for $community, $uni at " . scalar localtime);
+} else {
+	say 'Invalid parameters! comm: '. ($community // 'undefined'). ', uni: '.($uni // 'undefined');
+	say 'Correct syntax: script_single.pl org 1   (to run uni1.org)';
+	say 'Use threader.pl (no args) to process all unis in todo list.';
+}
+
+exit 0;
+1; # script ends here

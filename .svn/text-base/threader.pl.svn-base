@@ -1,0 +1,208 @@
+#!/usr/bin/perl -w
+##############################
+### CHECK PARAMETERS BELOW ###
+##############################
+#                            #
+#     version 2009/04/20     #
+#                            #
+### Put your server settings in localconfig.pm
+### Make sure defaults.pm, prefs.pm and your community-specific
+### configuration files exist in the OGAT subfolder.
+### Obviously, make sure you've read and configured OGAT/prefs.pm to your situation.
+use strict;
+use warnings;
+use 5.010_000;
+require 5.010_000;
+use feature ':5.10';
+package OGAT;
+our %settings = ();
+use threads;
+use Carp ();
+use Hash::Merge;
+use constant { false => 0, true  => 1 };
+require OGAT::prefs; # edit this file to suit your personal settings and preferences
+require "localconfig.pm";
+use threads::shared;
+use Thread::Queue;
+use DateTime;
+
+sub thread_start($$) { #USES: 0
+	my $foo = shift;
+	my $sema = shift;
+	die unless defined $foo; # undef on queue is bad thing.
+	say "Started thread ".threads->tid()."for $foo";
+	if (my ($community, $uni) = $foo=~/^(\w+)##(\w+)$/) {
+		my $result = system  $^X, 'script_single.pl', $community, $uni;
+		if ($result) { Carp::confess $result; } # big error likely
+	} else { Carp::confess "'$foo' is not valid work! Aborted."; }
+	if (defined $sema) { $sema->up(); } # allow new thread to be created
+	#log_("Ended thread for $foo at " . scalar localtime);
+	# thread ends normally here
+	0;
+}
+{
+	my $community =".";
+	my $uni = ".";
+	# my $thread = -1;
+	my $timezone = 'Europe/Berlin';
+	my $defaultformat = '%F %R';
+	my $loopprotection = 0;
+	sub lookup_init($$) {
+		($community,$uni) = @_;
+		# $thread = threads->tid() // "_";
+		$timezone = lookup('SERVERTIMEZONE','Europe/Berlin');
+		$defaultformat = lookup('DEFAULTDATEFORMAT','%F %T');
+	}
+	sub log_($) { my $s = ($uni//'_') . '.' . ($community // '_') 
+	# . '(' .	($thread // '_') . ')'
+	. ': ' . $_[0]; say $s; return $s; }
+
+	# Select a value from the settings by trying uni-specific, community-specific,
+	#   general settings and passed default value in order
+	# Doesn't error out if something's missing
+	sub lookup($;$%) { #USES: %settings
+		my ($key,$val, $hopts) = @_;
+		$val = $settings{$key} if defined $settings{$key};
+		if (defined $community) {
+			$val = $settings{$community}{$key}
+				if defined $settings{$community}{$key};
+			$val = $settings{$community}{$uni}{$key}
+				if defined $uni && defined $settings{$community}{$uni}{$key};
+		}
+		if (!defined $val) {
+			return undef if (defined $hopts and $hopts->{'allow_undef'});
+			Carp::confess "Couldn't initialize value '$key', comm: '"
+				.($community // '')."', uni: '".($uni // '')."'\n";
+		}
+		if (ref $val) { return $val }
+		
+		
+		# find strings like =STUFF= or
+		# =STUFF`opts, can't use the delimiters unless in a =SUBCOMM`dfd´= which is processed first´=
+		# while ($val =~ /(=([A-Z_]+)(?:>>((?:[^²<]|²[²<])*?)<<)?=)/) {
+		while ($val =~ /(=([A-Z_]+)(?:`([^´`]*?)´)?=)/) {
+			my ($f,$k,$o) = ($1,$2,$3); # full text to replace, lookup key, options
+			$loopprotection++ < 30 
+				or Carp::confess "Lookup with infinite replacement loop: '$key', val: '$val', found: $k";
+			#defined $o and $o =~ s/²([²<])/$1/g; # remove ² escapes
+			given ($k) {
+				when ('UNI') { 
+					if (defined $uni) {$val =~ s/$f/$uni/g}
+					else { Carp::confess "Uni replacement needed for key $k but not defined\n" }
+				}
+				when ('COMM') {
+					if (defined $community) {$val =~ s/$f/$community/g}
+					else { Carp::confess "Community replacement needed for key $k but not defined\n" }
+				}
+				when ('DATE') {
+					my $date = DateTime->now( time_zone => $timezone );
+					my $res = $date->strftime($o // $defaultformat);
+					$val =~ s/$f/$res/g;
+				}
+				when (%$hopts) { $val =~ s/$f/$hopts->{$k}/g; }
+				when ('CHR') { $o = chr($o); $val =~ s/$f/$o/g; }
+				default {
+					# first try a lookup for that key (used &sub syntax to prevent prototype warning)
+					my $res = &OGAT::lookup($k,'bgj jk;hvderqcbtykvzyzertcbyunuieryv');
+					if (!defined $res || $res eq 'bgj jk;hvderqcbtykvzyzertcbyunuieryv') {
+						log_("Unknown replacement token $f for key $key, value = $val");
+						$val =~ s/$f//g;
+					} else {
+						$val =~ s/$f/$res/;
+					}
+				}
+			}
+		}
+		$loopprotection = 0;
+		return $val;
+	};
+
+	# Select a hash from the settings, same procedure as lookup() but merges hashes of all levels.
+	sub lookup_hash($;\%) { #USES: %settings
+		my ($key, $href) = @_;
+		$href = {} if !defined $href || ref $href ne 'HASH';
+		$href = Hash::Merge::merge($settings{$key}, $href) if defined $settings{$key};
+		if (defined $community) {
+			$href = Hash::Merge::merge($settings{$community}{$key}, $href)
+				if defined $settings{$community}{$key};
+			$href = Hash::Merge::merge($settings{$community}{$uni}{$key}, $href)
+				if defined $uni && defined $settings{$community}{$uni}{$key};
+		}
+		if (scalar keys %$href == 0) {
+			Carp::confess "Couldn't initialize value '$key', comm: '"
+				.($community // '')."', uni: '".($uni // '')."'\n";
+		};
+		if (defined $uni) { recursivereplace($href, sub { s/=UNI=/$uni/g }) };
+		if (defined $community) { recursivereplace($href, sub { s/=COMM=/$community/g }) };
+		return $href;
+	};
+}
+
+
+
+
+
+
+
+
+say "Starting processing at ", scalar localtime;
+{  # quickly verify that there is no double work to be done
+my %delme = ();
+for my $community (keys %{$settings{'todo'}}) {
+	for my $uni (@{$settings{'todo'}{$community}}) {
+		die "'$community##$uni' appears twice in todo list!\n"
+			if ($delme{"$community##$uni"}++);
+}}}
+
+#add unis to be processed to the queue
+my @work = ();
+for my $community (keys %{$settings{'todo'}}) {
+	for my $uni (@{$settings{'todo'}{$community}}) {
+		push @work, "$community##$uni";
+	}
+}
+if (lookup('SHUFFLE_TODO',0)) { 
+	use List::Util qw( shuffle );
+	@work = shuffle @work;
+}
+## YEAH THREADING STUFF!!
+my $q = new Thread::Queue; # will contain all unis to process.
+my $numthreads = lookup('NUM_TREADS',0);
+if ($numthreads != int($numthreads) || $numthreads < 1) { $numthreads = 0 };
+use Config;
+$q->enqueue(@work);
+if (!defined $Config{'useithreads'} || !$Config{'useithreads'} || 0 == $numthreads) {
+	# Perl doesn't support threads or unthreaded version requested, so doing it the old fashioned way
+	say "Using unthreaded version, ". (scalar @work) . " unis to process";
+	while (@work) { thread_start(shift @work, undef); }
+} else {
+	say "Using threaded version, $numthreads threads will be used, ". (scalar @work) . " unis to process";
+	use Thread::Semaphore;
+	my $sema = Thread::Semaphore->new($numthreads);
+	
+	while (1) {
+		$sema->down();
+		last unless @work;
+		threads->create(\&thread_start, shift @work, $sema);
+		select(undef,undef,undef, 0.5);
+		for (threads->list(threads::joinable)) { $_->join(); }
+	}
+}
+
+do {
+	for (threads->list(threads::joinable)) { $_->join(); }
+	sleep(5);
+	threads->yield();
+} until (0 == threads->list(threads::running));
+
+for (threads->list(threads::joinable)) { $_->join(); }
+
+say "Remaining work: uni $_" for (@work);
+say "Finished at ", scalar localtime;
+say "User/system times: ", join( ';', times);
+exit;
+
+
+
+
+1; # script ends here

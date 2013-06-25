@@ -1,0 +1,70 @@
+h1 { counter-reset:deel; }
+h2:before { content:counter(deel) "."; counter-increment:deel; padding-right:.2em;}
+
+.points { text-align:right; font-size:90% }
+.points::before {  }
+.points::after { content:" pts"; font-size:70%; color:grey; }
+.name { color:#44f; padding:0 .2em; }
+.uid {  color:#99f; font-size:70%; font-weight:normal; }
+.nr {   color:#222; padding-right:.5em; }
+.ts {   color:#080; }
+td.start.ts { border-right:1px dotted grey; padding-right:.2em; }
+.year { display:none; font-size:50%; }
+.state .g { color:magenta; font-weight:bold; }
+.state .i { color:grey; font-weight:bold;  }
+.state .I { color:grey; font-weight:bold;  }
+.state .u { color:blue; font-weight:bold;  }
+.state .L { color:orange; font-weight:bold;  }
+.state .P { color:red; font-weight:bold; }
+.state::before { content:"("; }
+.state::after { content:")"; margin-right:.3em;  }
+.state { position:relative; }
+/*.state .extra { display:none; position:absolute; top:-1em;
+               background:#ff0; border:1px solid black;
+			   color:black; font-weight:normal; padding:1px;}
+ a:hover .extra { display:inline; }
+*/
+
+.pid { color:grey; font-size:70%; padding-left:.3em; }
+.pid::before { color:#BBB; font-size:100%; margin-left: .4em; content:"pid("; }
+.pid::after {  color:#BBB; font-size:100%; margin-right:.4em; content:")"; }
+.coords { color:#11A; }
+.coords::before { content:"["; color:#11A; padding-left:.3em; }
+.coords::after {  content:"]"; color:#11A; }
+.warning { color:red; }
+p.warning { margin:.5em; margin:0 0 0 2em; }
+.explanation { margin:.5em; margin:0 0 0 2em;}
+td.res { text-align:right; padding:0 .4em; min-width:2.5em }
+th { border:0px; border-bottom: 1px dashed black; padding-top:0; }
+h2 { margin-bottom:8px; }
+
+#generalstats .header { padding-right:.6em; }
+
+#missionstats td { text-align:right; border:0; border-bottom:1px dashed grey; padding:0 .5em }
+
+#mostactive .missions { text-align:right; padding-left:.2em; padding-right:.4em; }
+#statistics td { min-width:4em; padding: 0 .3em;}
+
+#bashers  .att { text-align:right; padding-right:.6em; font-weight:bold; }
+#bashers  td { text-align:right; }
+#bashers .p2 { text-align:left; max-width:300px;  }
+
+div.pushlog { padding-bottom:.5em; }
+.pushlog div.unsure { color:red; font-size:70%; margin-bottom:1px; margin-left:5em;}
+.pushlog span.u1::after { content:"\21D2"; margin:0 1em; font-weight:bold; }
+.pushlog table { margin-left:2em; border:1px solid grey; border-bottom:0; }
+.pushlog th { border:0px; border-bottom: 1px dashed black; padding-top:0;}
+.pushlog tr.log td { border-bottom:1px dashed #CCC }
+.pushlog .log .res { color:#888; }
+.pushlog .log.hilite .res { color:purple; }
+
+#inactivetransports table { border:1px solid grey; }
+#inactivetransports .end.ts { display:none; }
+divclipboardswf { display:none; }
+
+#menubar { 
+    position:fixed; top:0; right:0;  padding:1px; margin:0px;
+    color:#AAA; background-color:white; font-size:.75em
+ }
+.cmd[state="1"] { color:green; }
+.cmd:hover { border:none; text-decoration:underline; /*border-bottom:1px solid green;*/ }
