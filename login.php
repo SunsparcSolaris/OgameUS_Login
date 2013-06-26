@@ -14,6 +14,8 @@ $_SESSION['loggedin'] = "1";
 $_SESSION['role'] = $row['role'];
 $_SESSION['uni'] = $row['uni'];
 $_SESSION['usr'] = $row['usr'];
+$date = date("Y-m-d H:i:s");
+mysql_query("UPDATE login SET dt = '{$date}' WHERE usr = '{$_SESSION['usr']}'");
 header('Location: portal.php');
 }
 else {
