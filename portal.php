@@ -48,7 +48,7 @@ echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br />
 }
 elseif ( $role == 'go' ) {
 echo " <a href=\"chgpass.php\">Change Pass</a> | </center></center><br /><center><h3>$usr - Game Operator</h3></center> ";
-if (empty($uni)) {
+if (!empty($uni)) {
 foreach($uni as $page) {
 echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br /></center>";
 }
