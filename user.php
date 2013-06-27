@@ -32,7 +32,8 @@ Role: <select name="role"><option value=""></option>
 	<option value="sgo">SGO</option>
 </select>
 Uni Pages: <input type="text" size="16" name="unipages" />
-<input type="submit" name="addusrbutton" value="Add User" />
+<input type="submit" name="submit" value="Add User" />
+<input type="hidden" name="submitbutton" value="addusrbutton" />
 
 <br />
 <h4>Enter Uni Pages as comma separated numbers. Example: 1,102,105 etc.</h4>
@@ -58,3 +59,26 @@ require 'table.php';
 
 </body>
 </html>
+
+
+<?php
+
+require 'connect.php';
+require './lib/password.php';
+$actiontype = $_POST['submitbutton'];
+$usr = mysql_real_escape_string($_POST['addusr']);
+$pass = mysql_real_escape_string($_POST['addpass']);
+$encpass = password_hash($pass, PASSWORD_BCRYPT);
+$role = $_POST['role'];
+$unipages = mysql_real_escape_string($_POST['unipages']);
+
+if ( $actiontype == "addusrbutton" && password_verify($pass, $encpass)) {
+mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', role = '{$role}', uni = '{$unipages}'");
+}
+elseif (!password_verify($pass, $encpass)) {
+echo "Invalid";
+}
+else {
+echo "";
+}
+?>
