@@ -40,21 +40,21 @@ Uni Pages: <input type="text" size="16" name="unipages" />
 </fieldset>
 </form>
 </center>
-<br />
 <center>
 <form action="#" method="post" name="removeform">
 <fieldset>
 <legend>Remove User:</legend>
-Coming Soon...
+Type the Username you want to remove (Use the table below):<br >
+<center>User: <input type="text" name="rmusr" />
+<input type="submit" name="submit" value="Remove User" />
+<input type="hidden" name="submitbutton" value="rmusrbutton" />
+</center>
 </fieldset>
 </form>
 </center>
 
 <br />
 <center>
-<?php
-require 'table.php';
-?>
 </center>
 
 </body>
@@ -63,17 +63,20 @@ require 'table.php';
 
 <?php
 
+$actiontype = $_POST['submitbutton'];
+
+if ($actiontype == "addusrbutton") {
 require 'connect.php';
 require './lib/password.php';
-$actiontype = $_POST['submitbutton'];
 $usr = mysql_real_escape_string($_POST['addusr']);
 $pass = mysql_real_escape_string($_POST['addpass']);
 $encpass = password_hash($pass, PASSWORD_BCRYPT);
 $role = $_POST['role'];
 $unipages = mysql_real_escape_string($_POST['unipages']);
 
-if ( $actiontype == "addusrbutton" && password_verify($pass, $encpass)) {
+if (password_verify($pass, $encpass)) {
 mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', role = '{$role}', uni = '{$unipages}'");
+echo "User added!";
 }
 elseif (!password_verify($pass, $encpass)) {
 echo "Invalid";
@@ -81,4 +84,30 @@ echo "Invalid";
 else {
 echo "";
 }
+}
+
+
+if ($actiontype == "rmusrbutton") {
+require 'connect.php';
+$rmusr = $_POST['rmusr'];
+$filter = mysql_query("SELECT usr,role FROM login WHERE usr='{$rmusr}'");
+$query = mysql_fetch_array($filter);
+
+if ($query['role'] == "ga") {
+echo "You cannot remove another GA!";
+}
+elseif ($rmusr == $query['usr']) {
+mysql_query("DELETE FROM login WHERE usr='{$rmusr}' LIMIT 1");
+echo "User removed!";
+}
+else {
+echo "Username not found in database!";
+}
+}
+
+?>
+<br />
+
+<?php
+require 'table.php';
 ?>
