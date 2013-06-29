@@ -10,6 +10,15 @@ exit();
 <html>
 <head>
 <title>OgameUS Script Portal</title>
+<style type="text/css">
+fieldset {
+    width: 50%;
+    float: left;
+}
+legend {
+    margin: 0 5%;
+}
+</style>
 </head>
 
 <body>
@@ -21,12 +30,14 @@ $usr = $_SESSION['usr'];
 echo " <center><h3>$usr - Add/Remove Users</h3</center> ";
 ?>
 <br />
+<br />
+<center><a href="user.php">Refresh Table</a></center>
 <center>
 <form action="#" method="post" name="addform">
 <fieldset>
 <legend>Add User:</legend>
 Username: <input type="text" size="16" name="addusr" />
-Password: <input type="text" size="16" name="addpass" />
+Password: <input type="text" size="16" name="addpass" /><br />
 Role: <select name="role"><option value=""></option>
 	<option value="go">GO</option>
 	<option value="sgo">SGO</option>
@@ -35,16 +46,45 @@ Uni Pages: <input type="text" size="16" name="unipages" />
 <input type="submit" name="submit" value="Add User" />
 <input type="hidden" name="submitbutton" value="addusrbutton" />
 
-<br />
 <h4>Enter Uni Pages as comma separated numbers. Example: 1,102,105 etc.</h4>
 </fieldset>
 </form>
 </center>
+
+
+<center>
+<form action="#" method="post" name="editform">
+<fieldset>
+<legend>Edit User:</legend>
+<!-- Username: <input type="text" size="16" name="editusr" />*/ -->
+Username: <select name="editselect">
+<option value=""></option>
+<?php
+require 'connect.php';
+$filter = mysql_query("SELECT usr FROM login");
+while($row = mysql_fetch_array($filter))
+{
+echo "<option value=\"" . $row['usr'] . "\"> " . $row['usr'] . "</option>  ";
+}
+mysql_close($con);
+?>
+</select>
+Choose which to change:
+<input type="radio" name="editchoice" value="role" />Role
+<input type="radio" name="editchoice" value="uni" />Uni <br />
+Insert change: <input type="text" size="16" name="edittext" />
+<input type="submit" name="submit" value="Edit User" />
+<input type="hidden" name="submitbutton" value="editusrbutton" />
+<br />
+</fieldset>
+</form>
+</center>
+
 <center>
 <form action="#" method="post" name="removeform">
 <fieldset>
 <legend>Remove User:</legend>
-Type the Username you want to remove (Use the table below):<br >
+Type the Username you want to remove. (Use the table):<br />
 <center>User: <input type="text" name="rmusr" />
 <input type="submit" name="submit" value="Remove User" />
 <input type="hidden" name="submitbutton" value="rmusrbutton" />
@@ -53,9 +93,11 @@ Type the Username you want to remove (Use the table below):<br >
 </form>
 </center>
 
-<br />
 <center>
 </center>
+<?php
+require 'table.php';
+?>
 
 </body>
 </html>
@@ -95,6 +137,7 @@ $query = mysql_fetch_array($filter);
 
 if ($query['role'] == "ga") {
 echo "You cannot remove another GA!";
+exit();
 }
 elseif ($rmusr == $query['usr']) {
 mysql_query("DELETE FROM login WHERE usr='{$rmusr}' LIMIT 1");
@@ -105,9 +148,27 @@ echo "Username not found in database!";
 }
 }
 
-?>
-<br />
 
-<?php
-require 'table.php';
+if ($actiontype = "editusrbutton") {
+require 'connect.php';
+$editusr = $_POST['editselect'];
+$edittext = $_POST['edittext'];
+$editchoice = $_POST['editchoice'];
+$filter = mysql_query("SELECT usr,role,uni FROM login WHERE usr='{$editusr}'");
+$query = mysql_fetch_array($filter);
+
+if ($query['role'] == "ga") {
+echo "<br />You cannot edit another GA!";
+exit();
+}
+elseif ($editusr == $query['usr'] && $editchoice == "role") {
+mysql_query("UPDATE login SET role = '{$edittext}' WHERE usr = '{$editusr}'");
+echo "<br />User role updated!";
+}
+elseif ($editusr == $query['usr'] && $editchoice == "uni") {
+mysql_query("UPDATE login SET uni = '{$edittext}' WHERE usr = '{$editusr}'");
+echo "<br />User uni pages updated!";
+}
+}
 ?>
+
