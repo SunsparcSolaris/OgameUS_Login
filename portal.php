@@ -31,7 +31,7 @@ if ($loggedin !== "1") {
 
 <?php
 if ( $role == 'ga' ) {
-echo " <a href=\"user.php\">Add/Remove User</a> | <a href=\"chgpass.php\">Change Pass</a> | </center> <br /> <center><h3> $usr - Game Admin</h3></center> ";
+echo " <a href=\"user.php\">Manage Users</a> | <a href=\"chgpass.php\">Change Pass</a> | </center> <br /> <center><h3> $usr - Game Admin</h3></center> ";
 
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
