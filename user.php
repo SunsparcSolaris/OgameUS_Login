@@ -117,8 +117,8 @@ $role = $_POST['role'];
 $unipages = mysql_real_escape_string($_POST['unipages']);
 
 if (password_verify($pass, $encpass)) {
-mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', role = '{$role}', uni = '{$unipages}'");
-echo "User added!";
+mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', forcepass = '1', role = '{$role}', uni = '{$unipages}'");
+echo "User added! User will be required to change password upon first login!";
 }
 elseif (!password_verify($pass, $encpass)) {
 echo "Invalid";
