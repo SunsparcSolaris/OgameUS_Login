@@ -4,12 +4,12 @@ session_start();
 $loggedin = $_SESSION['loggedin'];
 $role = $_SESSION['role'];
 $usr = $_SESSION['usr'];
-if ($_SESSION['uni'] !== "all") {
 $uni = explode(',', $_SESSION['uni']);
+
+/*foreach($uni as $page) {
+echo " <a href=\"output/output.uni$page.html\" >Universe $page</a> <br />";
 }
-elseif ($_SESSION['uni'] == "all") {
-$uni = "all";
-}
+*/
 
 if ($loggedin !== "1") {
    print " <center><h1>You must log in first.<br />Redirecting to Login page...</h1></center> ";
@@ -24,9 +24,9 @@ if ($loggedin !== "1") {
 </head>
 <body>
 <center><h1>OgameUS Script Portal</h1></center>
-<center>|
-<a href="http://board.ogame.us" target="_blank">Board</a> |
-<a href="http://www.ogame.us" target="_blank">Game</a> |
+<center>| 
+<a href="http://board.ogame.us" target="_blank">Board</a> | 
+<a href="http://www.ogame.us" target="_blank">Game</a> | 
 
 
 <?php
