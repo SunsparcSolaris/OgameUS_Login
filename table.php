@@ -6,7 +6,7 @@ if (mysqli_connect_errno())
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-$result = mysqli_query($con,"SELECT id,usr,role,runtime,dt,uni FROM login");
+$result = mysqli_query($con,"SELECT id,usr,role,dt,locked,uni FROM login");
 
 echo "<table border='1'>
 <tr>
@@ -15,6 +15,7 @@ echo "<table border='1'>
 <th>Role</th>
 <th>LastLogin</th>
 <th>Uni</th>
+<th>Locked</th>
 </tr>";
 
 while($row = mysqli_fetch_array($result))
@@ -37,6 +38,12 @@ elseif ($timetotal <= "172800") {
   echo "<td class=\"green\">" . $row['dt'] . "</td>";
 }
   echo "<td>" . $row['uni'] . "</td>";
+if ($row['locked'] == "yes") {
+  echo "<td style=\"background-color:red\">" . $row['locked'] . "</td>";
+}
+elseif ($row['locked'] == "no") {
+  echo "<td>" . $row['locked'] . "</td>";
+}
   echo "</tr>";
   }
 echo "</table>";

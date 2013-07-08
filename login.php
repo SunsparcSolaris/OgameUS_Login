@@ -5,9 +5,14 @@ require 'connect.php';
 $_POST['usr'] = mysql_real_escape_string($_POST['usr']);
 $_POST['pass'] = mysql_real_escape_string($_POST['pass']);
 
-$filter = mysql_query("SELECT usr,pass,role,uni,forcepass FROM login WHERE usr='{$_POST['usr']}' AND pass='".md5($_POST['pass'])."'");
+$filter = mysql_query("SELECT usr,pass,role,uni,forcepass,locked FROM login WHERE usr='{$_POST['usr']}' AND pass='".md5($_POST['pass'])."'");
 
 $row = mysql_fetch_array($filter);
+if ( $row['locked'] == "yes" ) {
+echo "<br /><center><h1 style=\"color:red\">Account is locked. Please contact Admin.</h1></center>";
+exit();
+}
+
 if ( $row['usr'] != ""  && $row['pass'] != "" ) {
 session_start();
 $_SESSION['loggedin'] = "1";
