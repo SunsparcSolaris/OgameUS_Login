@@ -18,6 +18,10 @@ fieldset {
 legend {
     margin: 0 5%;
 }
+td.red {background-color:red;}
+td.yellow {background-color:yellow;}
+td.green {background-color:green;}
+center.right {float: right; margin-right:325px;}
 </style>
 </head>
 
