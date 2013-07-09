@@ -27,11 +27,13 @@ if ($loggedin !== "1") {
 <center>|
 <a href="http://board.ogame.us" target="_blank">Board</a> |
 <a href="http://www.ogame.us" target="_blank">Game</a> |
+<a href="http://tools.ogamecentral.com/trade-calculator" target="_blank">Trade Calc</a> |
+<a href="chgpass.php">Change Pass</a> |
 
 
 <?php
 if ( $role == 'ga' ) {
-echo " <a href=\"user.php\">Manage Users</a> | <a href=\"chgpass.php\">Change Pass</a> | </center> <br /> <center><h3> $usr - Game Admin</h3></center> ";
+echo " <a href=\"user.php\">Manage Users</a> | </center> <br /> <center><h3> $usr - Game Admin</h3></center> ";
 
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
@@ -43,7 +45,7 @@ echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
 
 
 elseif ( $role == 'sgo' ) {
-echo " <a href=\"chgpass.php\">Change Pass</a> | </center><br /><center><h3> $usr - Super Game Operator</h3></center> ";
+echo " </center><br /><center><h3> $usr - Super Game Operator</h3></center> ";
 if ($uni == "all") {
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
@@ -60,7 +62,7 @@ echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br />
 
 
 elseif ( $role == 'go' ) {
-echo " <a href=\"chgpass.php\">Change Pass</a> | </center></center><br /><center><h3>$usr - Game Operator</h3></center> ";
+echo " </center></center><br /><center><h3>$usr - Game Operator</h3></center> ";
 if (!empty($uni)) {
 foreach($uni as $page) {
 echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br /></center>";
