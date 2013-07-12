@@ -1,12 +1,6 @@
 <?php
-$con=mysqli_connect("localhost","root","meagan","ogameusers");
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-
-$result = mysqli_query($con,"SELECT id,usr,role,dt,locked,uni FROM login");
+require 'connect.php';
+$result = mysql_query("SELECT id,usr,role,dt,locked,uni FROM login");
 
 echo "<table border='1'>
 <tr>
@@ -18,7 +12,7 @@ echo "<table border='1'>
 <th>Locked</th>
 </tr>";
 
-while($row = mysqli_fetch_array($result))
+while($row = mysql_fetch_array($result))
   {
 $dt = $row['dt'];
 $dt = strtotime($dt);
@@ -51,5 +45,5 @@ echo "<center class=\"right\">Red > 3 days since last login.<br />
 Yellow > 2 days since last login.<br />
 Green < 2 days since last login.
 </center>";
-mysqli_close($con);
+mysql_close($con);
 ?>
