@@ -1,5 +1,5 @@
 <?php
-$con = mysql_connect("localhost","root","meagan");
+$con = mysql_connect("localhost","ogameusportal","ogameusgo");
 if (!$con)
   {
   die('Could not connect: ' . mysql_error());
