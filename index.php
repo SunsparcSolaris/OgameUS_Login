@@ -5,32 +5,28 @@ require 'connect.php';
 <html>
 <head>
 <title>OgameUS Script Portal</title>
-<style type="text/css">
-fieldset {
-    width: 45%;
-    float: center;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="design.css" />
 </head>
 
-<body>
+<body class="login">
 
 <br />
 <br />
 <br />
 <br />
 <br />
-<center><h1>OgameUS Script Portal Login</h1></center>
-<form action="login.php" method="post">
+<center><img src="img/portal-logo.png" alt="OgameUS Script Portal" /></center>
+<br />
+<form class="login" action="login.php" method="post">
 <center>
-<fieldset>
 Username: <input type="text" size="15" name="usr" /> &nbsp;
 Password: <input type="password" size="15" name="pass" /> &nbsp;
 <input type="submit" name="submit" value="Submit" />
 <br />
-</fieldset>
 </center>
-<br />
-<center>Please contact PinkFloyd with any questions or issues.</center>
 </form>
+<br />
+<center>Please contact PinkFloyd with any questions or issues.<br />
+<h3 class="login">All passwords have been reset, please check Script Portal thread in GO section.</h3>
+</center>
 

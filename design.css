@@ -1,0 +1,101 @@
+/*Login Page*/
+body.login {
+background-color: #006bb3;
+background-image: url('img/pagebackground.jpg');
+background-position: top center;
+background-attachment: scroll;
+background-repeat: no-repeat;
+color: white;
+}
+
+form.login {
+margin-left: auto;
+margin-right: auto;
+background-image: url('img/glass_ie.png');
+background-repeat: repeat-y;
+background-position: center;
+border: 1px solid #252525;
+width: 45%;
+}
+
+h3.login {
+margin-left: auto;
+margin-right: auto;
+color: #B40404;
+background-color: white;
+background-position: center;
+width: 50%;
+}
+
+/*Portal Page*/
+
+body.portal {
+background-color: #006bb3;
+background-image: url('img/pagebackground.jpg');
+background-position: top center;
+background-attachment: scroll;
+background-repeat: no-repeat;
+color: white;
+}
+
+#maindiv {
+margin-left: auto;
+margin-right: auto;
+background-image: url('img/glass_ie.png');
+background-repeat: repeat-y;
+background-position: center;
+border: 1px solid #252525;
+padding-top: 20px;
+padding-bottom: 20px;
+width: 20%;
+}
+
+#topbar a:link {color:white;}
+#topbar a:visited {color:white;}
+
+#maindiv a:link {
+color: white;
+}
+
+#maindiv a:visited {
+color: white;
+}
+
+#sidebar {
+background-image: url('img/glass_ie.png');
+background-repeat: repeat-y;
+background-position: center;
+border: 1px solid #252525;
+padding-top: 20px;
+padding-bottom: 20px;
+width: 13%;
+float: left;
+margin-left:375px;
+margin-top:-290px;
+padding-left:20px;
+padding-bottom:33px;
+}
+
+#sidebar a:link {color:white;}
+#sidebar a:visited {color:white;}
+
+#rightbar {
+background-image: url('img/glass_ie.png');
+background-repeat: repeat-y;
+background-position: center;
+border: 1px solid #252525;
+padding-top: 20px;
+padding-bottom: 20px;
+width: 13%;
+float: right;
+margin-right:375px;
+margin-top:-290px;
+padding-left:20px;
+padding-bottom:48px;
+}
+
+#rightbar a:link {color:white;}
+#rightbar a:visited {color:white;}
+
+#logout a:link {color:white;}
+#logout a:visited {color:white;}
