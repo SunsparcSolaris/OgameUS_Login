@@ -47,6 +47,7 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
 padding-bottom: 20px;
+height:288px;
 width: 20%;
 }
 
@@ -70,7 +71,7 @@ padding-top: 20px;
 padding-bottom: 20px;
 width: 13%;
 float: left;
-margin-left:375px;
+margin-left:350px;
 margin-top:-290px;
 padding-left:20px;
 padding-bottom:33px;
@@ -86,9 +87,10 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
 padding-bottom: 20px;
+height: 135px;
 width: 13%;
 float: right;
-margin-right:375px;
+margin-right:350px;
 margin-top:-290px;
 padding-left:20px;
 padding-bottom:48px;
