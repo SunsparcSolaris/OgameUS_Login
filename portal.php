@@ -31,19 +31,21 @@ if ($loggedin !== "1") {
 <a href="http://board.ogame.us" target="_blank">Board</a> |
 <a href="http://www.ogame.us" target="_blank">Game</a> |
 <a href="chgpass.php">Change Pass</a> |
+
 <?php
 if ($role == "ga" ) {
 echo "<a href=\"user.php\">Manage Users</a> |";
 }
 ?>
+
 </center>
+
 <?php
 if ( $role == 'ga' ) {
 echo " <br /> <center><h3> $usr - Game Admin</h3></center></div> ";
-
+echo "<div id=\"maindiv\">";
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
-echo "<div id=\"maindiv\">";
 foreach(array_slice($files,2) as $indfile) {
 echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
 }
@@ -51,11 +53,11 @@ echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
 
 
 elseif ( $role == 'sgo' ) {
-echo " </center><br /><center><h3> $usr - Super Game Operator</h3></center> ";
+echo " <br /><center><h3> $usr - Super Game Operator</h3></center> </div>";
+echo "<div id=\"maindiv\">";
 if ($uni == "all") {
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
-echo "<div id=\"maindiv\">";
 foreach(array_slice($files,2) as $indfile) {
 echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
 }
@@ -69,11 +71,11 @@ echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br />
 
 
 elseif ( $role == 'go' ) {
-echo " </center></center><br /><center><h3>$usr - Game Operator</h3></center> ";
+echo "<br /><center><h3>$usr - Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if (!empty($uni)) {
 foreach($uni as $page) {
-echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br /></center>";
+echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a><br /></center>";
 }
 }
 else {
@@ -95,6 +97,7 @@ GO Links: <br />
 <li><a href="http://tools.ogamecentral.com/trade-calculator" target="_blank">Trade Calculator</a></li>
 <li><a href="https://game.mx.gfsrv.net/" target="_blank">Webmail</a></li>
 <li><a href="http://kelder.dnsalias.net:58520/CrazyTom/" target="_blank">CrazyTom Tools</a></li>
+<li><a href="http://www.miraclesalad.com/webtools/md5.php" target="_blank">MD5 Hash</a></li>
 </ul>
 </div>
 <div id="rightbar">
