@@ -41,13 +41,15 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 </center>
 
 <?php
+$currentunis = "1,101,102,103,104,105,106,107,108,109,110,111,113";
+$currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
 echo " <br /> <center><h3> $usr - Game Admin</h3></center></div> ";
 echo "<div id=\"maindiv\">";
 $dir = './output';
 $files = preg_grep('/^([^.])/', scandir($dir));
 foreach(array_slice($files,2) as $indfile) {
-echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
+echo "<center><li><a href=\"output/$indfile\">$indfile</a></li>";
 }
 }
 
@@ -63,21 +65,32 @@ echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
 }
 }
 elseif($uni !== "all") {
+require 'connect.php';
 foreach($uni as $page) {
-echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a> <br /></center>";
+echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a>";
+$sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
+$fetch = mysql_fetch_array($sql);
+echo " - ";
+echo $fetch['run_end'];
 }
 }
 }
 
 
 elseif ( $role == 'go' ) {
+require 'connect.php';
 echo "<br /><center><h3>$usr - Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if (!empty($uni)) {
 foreach($uni as $page) {
-echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a><br /></center>";
+echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a>";
+$sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
+$fetch = mysql_fetch_array($sql);
+echo " - ";
+echo $fetch['run_end'];
 }
 }
+
 else {
 echo " <center>No universes to display.</center> ";
 }
@@ -115,6 +128,8 @@ GO Guides:
 <center>
 <h3><a href="logout.php">Log Out</a></h3>
 </center>
+<br />
+<center><a href="../hesk">Pushing Script Support</a></center>
 </div>
 </body>
 </html>
