@@ -10,6 +10,7 @@ exit();
 <html>
 <head>
 <title>OgameUS Script Portal</title>
+<link rel="stylesheet" type="text/css" href="design.css" />
 <style type="text/css">
 fieldset {
     width: 50%;
@@ -25,17 +26,14 @@ center.right {float: right; margin-right:325px;}
 </style>
 </head>
 
-<body>
+<body class="user">
 
-<center><h1>OgameUS Script Portal</h1></center>
+<center><img src="img/portal-logo.png" alt="OgameUS Script Portal" /></center>
 <center><a href="portal.php">Back To Portal Page</a></center>
 <?php
 $usr = $_SESSION['usr'];
 echo " <center><h3>$usr - Add/Remove Users</h3</center> ";
 ?>
-<br />
-<br />
-<center><a href="user.php">Refresh Table</a></center>
 <center>
 <form action="#" method="post" name="addform">
 <fieldset>
@@ -50,7 +48,6 @@ Uni Pages: <input type="text" size="16" name="unipages" />
 <input type="submit" name="submit" value="Add User" />
 <input type="hidden" name="submitbutton" value="addusrbutton" />
 
-<h4>Enter Uni Pages as comma separated numbers. Example: 1,102,105 etc.</h4>
 </fieldset>
 </form>
 </center>
