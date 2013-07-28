@@ -48,7 +48,7 @@ border: 1px solid #252525;
 padding-top: 20px;
 padding-bottom: 20px;
 height:288px;
-width: 20%;
+width: 30%;
 }
 
 #topbar a:link {color:white;}
@@ -101,3 +101,19 @@ padding-bottom:48px;
 
 #logout a:link {color:white;}
 #logout a:visited {color:white;}
+
+/* User Manage Page */
+
+body.user {
+background-color: #006bb3;
+background-image: url('img/pagebackground.jpg');
+background-position: top center;
+background-attachment: scroll;
+background-repeat: no-repeat;
+color: white;
+}
+
+body.user a:link,
+a:visited {
+color:white;
+}
