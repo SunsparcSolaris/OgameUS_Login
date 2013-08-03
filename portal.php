@@ -46,10 +46,17 @@ $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
 echo " <br /> <center><h3> $usr - Game Admin</h3></center></div> ";
 echo "<div id=\"maindiv\">";
-$dir = './output';
-$files = preg_grep('/^([^.])/', scandir($dir));
-foreach(array_slice($files,2) as $indfile) {
-echo "<center><li><a href=\"output/$indfile\">$indfile</a></li>";
+require 'connect.php';
+if (!empty($uni)) {
+echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
+foreach($currentunis as $page) {
+echo "<tr><td><center><a href=\"output/output.uni$page.php\" >Universe $page</a></td>";
+$sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
+$fetch = mysql_fetch_array($sql);
+$fetch = $fetch['run_end'];
+echo "<td>$fetch</td></tr>";
+}
+echo "</span></center></table>";
 }
 }
 
@@ -58,36 +65,51 @@ elseif ( $role == 'sgo' ) {
 echo " <br /><center><h3> $usr - Super Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if ($uni == "all") {
-$dir = './output';
-$files = preg_grep('/^([^.])/', scandir($dir));
-foreach(array_slice($files,2) as $indfile) {
-echo "<center><li><a href=\"output/$indfile\">$indfile</a></li></center>";
+require 'connect.php';
+if (!empty($uni)) {
+echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
+foreach($currentunis as $page) {
+echo "<tr><td><center><a href=\"output/output.uni$page.php\" >Universe $page</a></td>";
+$sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
+$fetch = mysql_fetch_array($sql);
+$fetch = $fetch['run_end'];
+echo "<td>$fetch</td></tr>";
+}
+echo "</span></center></table>";
 }
 }
 elseif($uni !== "all") {
 require 'connect.php';
+if (!empty($uni)) {
+echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($uni as $page) {
-echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a>";
+echo "<tr><td><center><a href=\"output/output.uni$page.php\" >Universe $page</a></td>";
 $sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
 $fetch = mysql_fetch_array($sql);
-echo " - ";
-echo $fetch['run_end'];
+$fetch = $fetch['run_end'];
+echo "<td>$fetch</td></tr>";
+}
+echo "</span></center></table>";
 }
 }
 }
 
 
 elseif ( $role == 'go' ) {
-require 'connect.php';
 echo "<br /><center><h3>$usr - Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if (!empty($uni)) {
+require 'connect.php';
+if (!empty($uni)) {
+echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($uni as $page) {
-echo " <center><a href=\"output/output.uni$page.php\" >Universe $page</a>";
+echo "<tr><td><center><a href=\"output/output.uni$page.php\" >Universe $page</a></td>";
 $sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
 $fetch = mysql_fetch_array($sql);
-echo " - ";
-echo $fetch['run_end'];
+$fetch = $fetch['run_end'];
+echo "<td>$fetch</td></tr>";
+}
+echo "</span></center></table>";
 }
 }
 
@@ -122,13 +144,10 @@ GO Guides:
 </ul>
 </div>
 
-<br />
-<br />
 <div id="logout">
 <center>
 <h3><a href="logout.php">Log Out</a></h3>
 </center>
-<br />
 <center><a href="../hesk">Pushing Script Support</a></center>
 </div>
 </body>
