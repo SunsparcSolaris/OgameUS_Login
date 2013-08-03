@@ -47,8 +47,13 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
 padding-bottom: 20px;
-height:288px;
+height:330px;
 width: 30%;
+}
+
+table.padded td {
+padding-left: 7px;
+padding-right: 7px;
 }
 
 #topbar a:link {color:white;}
