@@ -37,4 +37,6 @@ $_SESSION['loggedin'] = "0";
 header('Location: portal.php');
 }
 
+mysql_close($con);
+
 ?>

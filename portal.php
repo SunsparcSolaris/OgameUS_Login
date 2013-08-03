@@ -100,7 +100,7 @@ echo " <center>No universes to display.</center> ";
 else {
 print " <center><h1>Access Denied</h1></center> ";
 }
-
+mysql_close($con);
 ?>
 </div>
 <div id="sidebar">

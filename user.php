@@ -171,5 +171,7 @@ mysql_query("UPDATE login SET uni = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User uni pages updated!";
 }
 }
+
+mysql_close($con);
 ?>
 

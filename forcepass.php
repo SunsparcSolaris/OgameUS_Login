@@ -69,4 +69,6 @@ echo " <center>New passwords do not match, try again!</center> ";
 elseif ( $_POST['chgpassbutton'] !== "Change Password" ) {
 exit();
 }
+
+mysql_close($con);
 ?>
