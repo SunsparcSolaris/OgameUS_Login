@@ -45,9 +45,9 @@ background-image: url('img/glass_ie.png');
 background-repeat: repeat-y;
 background-position: center;
 border: 1px solid #252525;
-padding-top: 20px;
-padding-bottom: 20px;
-height:330px;
+padding-top: 10px;
+padding-bottom: 10px;
+height:345px;
 width: 30%;
 }
 
