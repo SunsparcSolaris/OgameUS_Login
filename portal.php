@@ -1,4 +1,4 @@
-<?php
+\<?php
 
 session_start();
 $loggedin = $_SESSION['loggedin'];
@@ -48,7 +48,7 @@ echo " <br /> <center><h3> $usr - Game Admin</h3></center></div> ";
 echo "<div id=\"maindiv\">";
 require 'connect.php';
 if (!empty($uni)) {
-echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
+echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run (EST)</th><span class=\"td\">";
 foreach($currentunis as $page) {
 echo "<tr><td><center><a href=\"output/output.uni$page.php\" >Universe $page</a></td>";
 $sql = mysql_query("SELECT run_end FROM ogameus_".$page.".runs ORDER BY run_id DESC LIMIT 1");
