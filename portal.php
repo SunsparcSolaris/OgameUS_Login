@@ -1,4 +1,4 @@
-\<?php
+<?php
 
 session_start();
 $loggedin = $_SESSION['loggedin'];
@@ -44,7 +44,7 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 $currentunis = "1,101,102,103,104,105,106,107,108,109,110,111,113,114";
 $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
-echo " <br /> <center><h3> $usr - Game Admin</h3></center></div> ";
+echo "  <center><h3> $usr - Game Admin</h3></center></div> ";
 echo "<div id=\"maindiv\">";
 require 'connect.php';
 if (!empty($uni)) {
@@ -62,7 +62,7 @@ echo "</span></center></table>";
 
 
 elseif ( $role == 'sgo' ) {
-echo " <br /><center><h3> $usr - Super Game Operator</h3></center> </div>";
+echo " <center><h3> $usr - Super Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if ($uni == "all") {
 require 'connect.php';
@@ -96,7 +96,7 @@ echo "</span></center></table>";
 
 
 elseif ( $role == 'go' ) {
-echo "<br /><center><h3>$usr - Game Operator</h3></center> </div>";
+echo "<center><h3>$usr - Game Operator</h3></center> </div>";
 echo "<div id=\"maindiv\">";
 if (!empty($uni)) {
 require 'connect.php';
