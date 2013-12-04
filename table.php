@@ -41,6 +41,8 @@ elseif ($row['locked'] == "no") {
   echo "</tr>";
   }
 echo "</table>";
+echo "<br />";
+echo "<br \/>";
 echo "<a href=\"user.php\">Refresh Table</a>";
 echo "<center class=\"right\">Red > 3 days since last login.<br />
 Yellow > 2 days since last login.<br />
