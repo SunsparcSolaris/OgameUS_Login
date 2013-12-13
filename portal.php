@@ -41,7 +41,7 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 </center>
 
 <?php
-$currentunis = "1,101,102,103,104,105,106,107,108,109,110,111,113,114";
+$currentunis = "1,101,102,103,104,105,106,107,108,109,110,111,113,114,115";
 $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
 echo "  <center><h3> $usr - Game Admin</h3></center></div> ";
