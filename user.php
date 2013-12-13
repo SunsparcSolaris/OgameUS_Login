@@ -167,7 +167,7 @@ mysql_query("UPDATE login SET role = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User role updated!";
 }
 elseif ($editusr == $query['usr'] && $editchoice == "uni") {
-mysql_query("UPDATE login SET uni = '{$edittext}' WHERE usr = '{$editusr}'");
+mysql_query("UPDATE login SET uni = '{$edittext}', locked = 'no' WHERE usr = '{$editusr}'");
 echo "<br />User uni pages updated!";
 }
 }
