@@ -8,8 +8,6 @@ $password = mysql_real_escape_string($_POST['pass']);
 
 $filter = mysql_query("SELECT usr,pass,role,uni,forcepass,locked FROM login WHERE usr='{$_POST['usr']}'");
 
-$hash = password_hash($password, PASSWORD_BCRYPT);
-
 $row = mysql_fetch_array($filter);
 if ( $row['locked'] == "yes" ) {
 echo "<br /><center><h1 style=\"color:red\">Account is locked. Please contact Admin.</h1></center>";
