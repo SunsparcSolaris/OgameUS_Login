@@ -57,7 +57,7 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 10px;
 padding-bottom: 10px;
-height:385px;
+height:200px;
 width: 30%;
 }
 
@@ -100,7 +100,7 @@ padding-bottom: 20px;
 width: 13%;
 float: left;
 margin-left:25%;
-margin-top:-290px;
+margin-top:-200px;
 padding-left:20px;
 padding-bottom:33px;
 }
@@ -115,13 +115,12 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
 padding-bottom: 20px;
-height: 135px;
 width: 13%;
 float: right;
 margin-right:25%;
-margin-top:-290px;
+margin-top:-200px;
 padding-left:20px;
-padding-bottom:48px;
+padding-bottom:33px;
 }
 
 #rightbar a:link {color:white;}
