@@ -41,7 +41,8 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 </center>
 
 <?php
-$currentunis = "1,102,110,111,113,114,115";
+
+$currentunis = file_get_contents('./currentunis');
 $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
 echo "  <center><h3> $usr - Game Admin</h3></center></div> ";
