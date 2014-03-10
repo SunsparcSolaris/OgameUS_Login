@@ -147,6 +147,11 @@ GO Guides:
 
 <div id="logout">
 <center>
+<h3>News:</h3>
+<?php
+$news = file_get_contents('./news');
+print($news);
+?>
 <h3><a href="logout.php">Log Out</a></h3>
 </center>
 <center><a href="../hesk">Pushing Script Support</a></center>
