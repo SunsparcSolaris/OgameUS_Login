@@ -57,7 +57,7 @@ background-position: center;
 border: 1px solid #252525;
 padding-top: 10px;
 padding-bottom: 10px;
-height:260px;
+height:285px;
 width: 30%;
 }
 
@@ -96,11 +96,10 @@ background-repeat: repeat-y;
 background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
-padding-bottom: 20px;
 width: 13%;
 float: left;
 margin-left:25%;
-margin-top:-200px;
+margin-top:-250px;
 padding-left:20px;
 padding-bottom:33px;
 }
@@ -114,11 +113,10 @@ background-repeat: repeat-y;
 background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
-padding-bottom: 20px;
 width: 13%;
 float: right;
 margin-right:25%;
-margin-top:-200px;
+margin-top:-250px;
 padding-left:20px;
 padding-bottom:33px;
 }
