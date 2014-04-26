@@ -22,13 +22,10 @@ $timetotal = $ctime - $dt;
   echo "<td>" . $row['id'] . "</td>";
   echo "<td>" . $row['usr'] . "</td>";
   echo "<td>" . $row['role'] . "</td>";
-if ($timetotal >= "172800" && $timetotal <= "259200") {
-  echo "<td class=\"yellow\">" . $row['dt'] . "</td>";
-}
-elseif ($timetotal >= "259200") {
+if ($timetotal >= "259200") {
   echo "<td class=\"red\">" . $row['dt'] . "</td>";
 }
-elseif ($timetotal <= "172800") {
+elseif ($timetotal <= "259200") {
   echo "<td class=\"green\">" . $row['dt'] . "</td>";
 }
   echo "<td>" . $row['uni'] . "</td>";
@@ -45,7 +42,6 @@ echo "<br />";
 echo "<br \/>";
 echo "<a href=\"user.php\">Refresh Table</a>";
 echo "<center class=\"right\">Red > 3 days since last login.<br />
-Yellow > 2 days since last login.<br />
 Green < 2 days since last login.
 </center>";
 mysql_close($con);
