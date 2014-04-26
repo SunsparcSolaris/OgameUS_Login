@@ -11,6 +11,17 @@ exit();
 <head>
 <title>OgameUS Script Portal</title>
 <link rel="stylesheet" type="text/css" href="design.css" />
+<link rel="stylesheet" href="jquery-ui.css">
+  <script src="jquery-1.10.2.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script>
+ $(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true,
+	active: false
+    });
+  });
+  </script>
 <style type="text/css">
 fieldset {
     width: 50%;
@@ -34,10 +45,10 @@ center.right {float: right; margin-right:325px;}
 $usr = $_SESSION['usr'];
 echo " <center><h3>$usr - Add/Remove Users</h3</center> ";
 ?>
-<center>
+<div id="accordion">
+<h3>Add User</h3>
+<div>
 <form action="#" method="post" name="addform">
-<fieldset>
-<legend>Add User:</legend>
 Username: <input type="text" size="16" name="addusr" />
 Password: <input type="text" size="16" name="addpass" /><br />
 Role: <select name="role"><option value=""></option>
@@ -48,15 +59,12 @@ Uni Pages: <input type="text" size="16" name="unipages" />
 <input type="submit" name="submit" value="Add User" />
 <input type="hidden" name="submitbutton" value="addusrbutton" />
 
-</fieldset>
 </form>
-</center>
+</div>
 
-
-<center>
+<h3>Edit User</h3>
+<div>
 <form action="#" method="post" name="editform">
-<fieldset>
-<legend>Edit User:</legend>
 <!-- Username: <input type="text" size="16" name="editusr" />*/ -->
 Username: <select name="editselect">
 <option value=""></option>
@@ -77,21 +85,20 @@ Insert change: <input type="text" size="16" name="edittext" />
 <input type="submit" name="submit" value="Edit User" />
 <input type="hidden" name="submitbutton" value="editusrbutton" />
 <br />
-</fieldset>
 </form>
-</center>
+</div>
 
-<center>
+<h3>Remove User</h3>
+<div>
 <form action="#" method="post" name="removeform">
-<fieldset>
-<legend>Remove User:</legend>
 Type the Username you want to remove. (Use the table):<br />
 <center>User: <input type="text" name="rmusr" />
 <input type="submit" name="submit" value="Remove User" />
 <input type="hidden" name="submitbutton" value="rmusrbutton" />
-</center>
-</fieldset>
 </form>
+</div>
+</div>
+
 </center>
 
 <center>
