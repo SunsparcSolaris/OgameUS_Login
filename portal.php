@@ -36,6 +36,9 @@ if ($loggedin !== "1") {
 if ($role == "ga" ) {
 echo "<a href=\"user.php\">Manage Users</a> |";
 }
+elseif ($role == "sgo") {
+echo "<a href=\"user.php\">Manage Users</a> |";
+}
 ?>
 
 </center>
