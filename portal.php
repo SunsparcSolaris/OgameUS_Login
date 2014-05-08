@@ -131,7 +131,7 @@ GO Links: <br />
 <ul>
 <li><a href="https://coma.gameforge.com/index.php" target="_blank">COMA Tool</a></li>
 <li><a href="https://game.mx.gfsrv.net/" target="_blank">Webmail</a></li>
-<li><a href="http://kelder.dnsalias.net:58520/CrazyTom/" target="_blank">CrazyTom Tools</a></li>
+<li><a href="http://ogame.ksenior.net/CrazyTom/" target="_blank">CrazyTom Tools</a></li>
 <li><a href="http://www.miraclesalad.com/webtools/md5.php" target="_blank">MD5 Hash</a></li>
 </ul>
 </div>
