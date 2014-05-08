@@ -56,6 +56,7 @@ Role: <select name="role"><option value=""></option>
 	<option value="sgo">SGO</option>
 </select>
 Uni Pages: <input type="text" size="16" name="unipages" />
+Email: <input type="text" size="16" name="email" />
 <input type="submit" name="submit" value="Add User" />
 <input type="hidden" name="submitbutton" value="addusrbutton" />
 
@@ -123,9 +124,10 @@ $pass = mysql_real_escape_string($_POST['addpass']);
 $encpass = password_hash($pass, PASSWORD_BCRYPT);
 $role = $_POST['role'];
 $unipages = mysql_real_escape_string($_POST['unipages']);
+$email = mysql_real_escape_string($_POST['email']);
 
 if (password_verify($pass, $encpass)) {
-mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', forcepass = '1', locked = 'no', role = '{$role}', uni = '{$unipages}'");
+mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', forcepass = '1', locked = 'no', role = '{$role}', uni = '{$unipages}', email = '{$email}'");
 echo "User added! User will be required to change password upon first login!";
 }
 elseif (!password_verify($pass, $encpass)) {
