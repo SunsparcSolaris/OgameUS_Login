@@ -1,7 +1,7 @@
 <?php
 session_start();
 $role = $_SESSION['role'];
-if ( $role !== "ga" ) {
+if ( $role !== "ga" && $role !== "sgo" ) {
 echo "<center><h1>Access Denied</h1><br /><h3>Redirecting to login page...</h3></center>";
 echo "<meta http-equiv='refresh' content='5,url=index.php'>";
 exit();
@@ -44,6 +44,10 @@ center.right {float: right; margin-right:325px;}
 <?php
 $usr = $_SESSION['usr'];
 echo " <center><h3>$usr - Add/Remove Users</h3</center> ";
+?>
+
+<?php
+if ( $role == "ga" ) {
 ?>
 <div id="accordion">
 <h3>Add User</h3>
@@ -99,8 +103,12 @@ Type the Username you want to remove. (Use the table):<br />
 </form>
 </div>
 </div>
-
 </center>
+<?php }
+else {
+echo '';
+}
+?>
 
 <center>
 </center>
