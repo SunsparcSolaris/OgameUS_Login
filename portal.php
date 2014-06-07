@@ -41,6 +41,15 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 }
 ?>
 &nbsp;<a href="https://www.nomegahurts.com/hesk">Support</a> |
+ Status:<?php
+    exec("ps aux | grep -i script_single | grep -v grep", $pids);
+    if (count($pids) > 0) {
+        print("<b style=\"color:limegreen; background-color:black;\">&nbsp;Running </b>");
+    }
+    else {
+	print(" <b>Idle</b>");
+	}
+?>
 </center>
 
 <?php
