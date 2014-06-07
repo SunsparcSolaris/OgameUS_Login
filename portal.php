@@ -40,7 +40,7 @@ elseif ($role == "sgo") {
 echo "<a href=\"user.php\">Manage Users</a> |";
 }
 ?>
-
+&nbsp;<a href="https://www.nomegahurts.com/hesk">Support</a> |
 </center>
 
 <?php
@@ -148,18 +148,18 @@ GO Guides:
 </ul>
 </div>
 
-<div id="logout">
 <center>
-<h3><a href="logout.php">Log Out</a></h3>
-
 <h3>News:</h3>
 <?php
 $news = file_get_contents('./news');
 print($news);
 ?>
 </center>
-<br />
-<center><a href="https://www.nomegahurts.com/hesk">Pushing Script Support</a></center>
+<div id="logout">
+<center>
+<h3><a href="logout.php">Log Out</a></h3>
+
+</center>
 </div>
 </body>
 </html>
