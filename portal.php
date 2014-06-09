@@ -1,5 +1,7 @@
 <?php
 
+require 'connect.php';
+
 session_start();
 $loggedin = $_SESSION['loggedin'];
 $role = $_SESSION['role'];
@@ -24,10 +26,11 @@ if ($loggedin !== "1") {
 <link rel="stylesheet" type="text/css" href="design.css" />
 </head>
 <body class="portal">
+<p style="margin-left:75%;"><?php echo "<b>User: $usr - Role: "; echo strtoupper($role); echo "</b>" ?></p>
 <center><img src="img/portal-logo.png" alt="OgameUS Script Portal" /></center>
 <br />
 <div id="topbar">
-<center>|
+<center>
 <a href="http://board.ogame.us" target="_blank">Board</a> |
 <a href="http://www.ogame.us" target="_blank">Game</a> |
 <a href="chgpass.php">Change Pass</a> |
@@ -41,25 +44,23 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 }
 ?>
 &nbsp;<a href="https://www.nomegahurts.com/hesk">Support</a> |
- Status:<?php
+ <u>Status:<?php
     exec("ps aux | grep -i script_single | grep -v grep", $pids);
     if (count($pids) > 0) {
-        print("<b style=\"color:limegreen; background-color:black;\">&nbsp;Running </b>");
+        print("<b style=\"color:limegreen; background-color:black;\">&nbsp;Running&nbsp;</b>");
     }
     else {
 	print(" <b>Idle</b>");
 	}
 ?>
-</center>
+</u></center><br />
 
 <?php
 
 $currentunis = file_get_contents('./currentunis');
 $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
-echo "  <center><h3> $usr - Game Admin</h3></center></div> ";
-echo "<div id=\"maindiv\">";
-require 'connect.php';
+echo "</div><div id=\"maindiv\">";
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run (EST)</th><span class=\"td\">";
 foreach($currentunis as $page) {
@@ -75,10 +76,8 @@ echo "</span></center></table>";
 
 
 elseif ( $role == 'sgo' ) {
-echo " <center><h3> $usr - Super Game Operator</h3></center> </div>";
-echo "<div id=\"maindiv\">";
+echo "</div><div id=\"maindiv\">";
 if ($uni == "all") {
-require 'connect.php';
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($currentunis as $page) {
@@ -92,7 +91,6 @@ echo "</span></center></table>";
 }
 }
 elseif($uni !== "all") {
-require 'connect.php';
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($uni as $page) {
@@ -109,10 +107,8 @@ echo "</span></center></table>";
 
 
 elseif ( $role == 'go' ) {
-echo "<center><h3>$usr - Game Operator</h3></center> </div>";
-echo "<div id=\"maindiv\">";
+echo "</div><div id=\"maindiv\">";
 if (!empty($uni)) {
-require 'connect.php';
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($uni as $page) {
@@ -159,11 +155,11 @@ GO Guides:
 
 <center>
 <h3>News:</h3>
-<?php
-$news = file_get_contents('./news');
+<?php $news = file_get_contents('./news');
 print($news);
 ?>
 </center>
+
 <div id="logout">
 <center>
 <h3><a href="logout.php">Log Out</a></h3>
