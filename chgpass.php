@@ -30,9 +30,9 @@ echo " <h3>$usr - Change Password</h3> ";
 <div id="chgpassdiv">
 <center>
 <form action="#" method="post">
-<label>Old Password:</label> <input type="password" size="16" name="oldpass" /><br />
+&nbsp;<label>Old Password:</label> <input type="password" size="16" name="oldpass" /><br />
 <label>New Password:</label> <input type="password" size="16" name="newpass" /><br />
-<label>Confirm New: </label> <input type="password" size="16" name="confnewpass" /><br /><br />
+&nbsp;<label>Confirm New: </label> <input type="password" size="16" name="confnewpass" /><br /><br />
 <input type="hidden" name="chgpass" value="chgpass" />
 <input type="submit" name="chgpassbutton" value="Change Password" />
 </form>
