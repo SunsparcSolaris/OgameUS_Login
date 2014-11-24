@@ -15,11 +15,17 @@ if ($_SESSION['loggedin'] !== "1") {
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="design.css" />
 <title>OgameUS Script Portal | Forced Password Change</title>
 </head>
-</body>
+<body class="chgpass">
 
-<center><h1>OgameUS Script Portal</h1><br />
+<br />
+<br />
+<br />
+<center><img src="img/portal-logo.png" alt="OgameUS Script Portal" /></center>
+
+<center>
 <?php
 $usr = $_SESSION['usr'];
 echo " <h3>$usr - Forced Password Change</h3> ";
@@ -29,9 +35,9 @@ echo " <h3>$usr - Forced Password Change</h3> ";
 <center>
 <form action="#" method="post">
 <fieldset>
-<label>Old Password:</label> <input type="password" size="16" name="oldpass" /><br />
+&nbsp;<label>Old Password:</label> <input type="password" size="16" name="oldpass" /><br />
 <label>New Password:</label> <input type="password" size="16" name="newpass" /><br />
-<label>Confirm Pass: </label> <input type="password" size="16" name="confnewpass" /><br /><br />
+&nbsp;<label>Confirm Pass: </label> <input type="password" size="16" name="confnewpass" /><br /><br />
 <input type="hidden" name="chgpass" value="chgpass" />
 <input type="submit" name="chgpassbutton" value="Change Password" />
 </fieldset>
