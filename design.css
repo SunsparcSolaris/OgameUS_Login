@@ -18,6 +18,11 @@ border: 1px solid #252525;
 width: 45%;
 }
 
+h4.login a:link,
+a:visited {
+color:white;
+}
+
 h3.login {
 margin-left: auto;
 margin-right: auto;
