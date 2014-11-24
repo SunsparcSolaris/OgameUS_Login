@@ -54,11 +54,11 @@ if ( $role == "ga" ) {
 <div>
 <form action="#" method="post" name="addform">
 Username: <input type="text" size="16" name="addusr" />
-Password: <input type="text" size="16" name="addpass" /><br />
+<!--Password: <input type="text" size="16" name="addpass" />-->
 Role: <select name="role"><option value=""></option>
 	<option value="go">GO</option>
 	<option value="sgo">SGO</option>
-</select>
+</select><br />
 Uni Pages: <input type="text" size="16" name="unipages" />
 Email: <input type="text" size="16" name="email" />
 <input type="submit" name="submit" value="Add User" />
@@ -127,16 +127,19 @@ $actiontype = $_POST['submitbutton'];
 if ($actiontype == "addusrbutton") {
 require 'connect.php';
 require './lib/password.php';
+require 'rdmpwgen.php';
 $usr = mysql_real_escape_string($_POST['addusr']);
-$pass = mysql_real_escape_string($_POST['addpass']);
+/*$pass = mysql_real_escape_string($_POST['addpass']);*/
+$pass = rand_string(5);
 $encpass = password_hash($pass, PASSWORD_BCRYPT);
 $role = $_POST['role'];
 $unipages = mysql_real_escape_string($_POST['unipages']);
-$email = mysql_real_escape_string($_POST['email']);
+$email = mysql_real_escape_string(strtolower($_POST['email']));
 
 if (password_verify($pass, $encpass)) {
 mysql_query("INSERT INTO login SET usr = '{$usr}', pass = '{$encpass}', forcepass = '1', locked = 'no', role = '{$role}', uni = '{$unipages}', email = '{$email}'");
 echo "User added! User will be required to change password upon first login!";
+mail($email,"Your Ogame.US Script Portal Account","Hello, $usr, \r\n http://ogameus.bwmhost.us \r\n \r\n Username: $usr \r\n Password: $pass","From: PinkFloyd@ogame.us");
 }
 elseif (!password_verify($pass, $encpass)) {
 echo "Invalid";
