@@ -43,7 +43,7 @@ elseif ($role == "sgo") {
 echo "<a href=\"user.php\">Manage Users</a> |";
 }
 ?>
-&nbsp;<a href="https://www.nomegahurts.com/hesk">Support</a> |
+&nbsp;<a href="https://www.bwmhost.us/hesk">Support</a> |
  <u>Status:<?php
     exec("ps aux | grep -i script_single | grep -v grep", $pids);
     if (count($pids) > 0) {
@@ -149,7 +149,7 @@ GO Guides:
 <li><a href="http://board.ogame.us/board174-news/board175-the-game/51895-new-ogame-us-rules-effective-17th-sept-2012/" target="_blank">OgameUS Rules</a></li>
 <li><a href="http://board.ogame.us/board27-team-section/board247-go-lair/board254-go-tools/42933-new-go-guide/" target="_blank">GO Guide</a></li>
 <li><a href="http://board.ogame.us/board27-team-section/board247-go-lair/board254-go-tools/61973-at-note-guide/" target="_blank">AT Note Guide</a></li>
-<li><a href="http://www.infuza.com/en/ogame.us" target="_blank">Ogame Stats</a></li>
+<li><a href="http://ogame.gamestats.org/?lang=us" target="_blank">Ogame Stats</a></li>
 </ul>
 </div>
 
