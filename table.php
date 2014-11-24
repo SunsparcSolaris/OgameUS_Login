@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-$result = mysql_query("SELECT id,usr,role,dt,locked,uni FROM login");
+$result = mysql_query("SELECT id,usr,role,dt,locked,uni,email FROM login");
 
 echo "<table border='1'>
 <tr>
@@ -10,6 +10,7 @@ echo "<table border='1'>
 <th>LastLogin</th>
 <th>Uni</th>
 <th>Locked</th>
+<th>Email</th>
 </tr>";
 
 while($row = mysql_fetch_array($result))
@@ -35,6 +36,7 @@ if ($row['locked'] == "yes") {
 elseif ($row['locked'] == "no") {
   echo "<td>" . $row['locked'] . "</td>";
 }
+  echo "<td>" . $row['email'] . "</td>";
   echo "</tr>";
   }
 echo "</table>";
