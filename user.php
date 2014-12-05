@@ -85,7 +85,8 @@ mysql_close($con);
 </select>
 Choose which to change:
 <input type="radio" name="editchoice" value="role" />Role
-<input type="radio" name="editchoice" value="uni" />Uni <br />
+<input type="radio" name="editchoice" value="uni" />Uni
+<input type="radio" name="editchoice" value="email" />Email <br />
 Insert change: <input type="text" size="16" name="edittext" />
 <input type="submit" name="submit" value="Edit User" />
 <input type="hidden" name="submitbutton" value="editusrbutton" />
@@ -175,7 +176,7 @@ require 'connect.php';
 $editusr = $_POST['editselect'];
 $edittext = $_POST['edittext'];
 $editchoice = $_POST['editchoice'];
-$filter = mysql_query("SELECT usr,role,uni FROM login WHERE usr='{$editusr}'");
+$filter = mysql_query("SELECT usr,role,uni,email FROM login WHERE usr='{$editusr}'");
 $query = mysql_fetch_array($filter);
 
 if ($query['role'] == "ga") {
@@ -189,6 +190,10 @@ echo "<br />User role updated!";
 elseif ($editusr == $query['usr'] && $editchoice == "uni") {
 mysql_query("UPDATE login SET uni = '{$edittext}', locked = 'no' WHERE usr = '{$editusr}'");
 echo "<br />User uni pages updated!";
+}
+elseif ($editusr == $query['usr'] && $editchoice == "email") {
+mysql_query("UPDATE login SET email = '{$edittext}', locked = 'no' WHERE usr = '{$editusr}'");
+echo "<br />User email address updated!";
 }
 }
 
