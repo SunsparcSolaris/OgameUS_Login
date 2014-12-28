@@ -23,10 +23,10 @@ $timetotal = $ctime - $dt;
   echo "<td>" . $row['id'] . "</td>";
   echo "<td>" . $row['usr'] . "</td>";
   echo "<td>" . $row['role'] . "</td>";
-if ($timetotal >= "259200") {
+if ($timetotal >= "432000") {
   echo "<td class=\"red\">" . $row['dt'] . "</td>";
 }
-elseif ($timetotal <= "259200") {
+elseif ($timetotal <= "432000") {
   echo "<td class=\"green\">" . $row['dt'] . "</td>";
 }
   echo "<td>" . $row['uni'] . "</td>";
@@ -41,8 +41,8 @@ elseif ($row['locked'] == "no") {
   }
 echo "</table>";
 echo "<a style=\"margin-left:45%;\" href=\"user.php\">Refresh Table</a>";
-echo "<center class=\"right\">Red > 3 days since last login.<br />
-Green < 2 days since last login.
+echo "<center class=\"right\">Red: More than 5 days since last login.<br />
+Green: Less than  2 days since last login.
 </center>";
 mysql_close($con);
 ?>
