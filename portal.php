@@ -141,6 +141,7 @@ GO Links: <br />
 <li><a href="https://game.mx.gfsrv.net/" target="_blank">Webmail</a></li>
 <li><a href="http://ogame.ksenior.net/CrazyTom/" target="_blank">CrazyTom Tools</a></li>
 <li><a href="http://www.miraclesalad.com/webtools/md5.php" target="_blank">MD5 Hash</a></li>
+<li><a href="calendar/">Training Calendar</a></li>
 </ul>
 </div>
 <div id="rightbar">
