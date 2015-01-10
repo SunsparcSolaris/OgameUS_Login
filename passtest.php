@@ -9,8 +9,9 @@
 <br />
 <center>
 <form action="#" method="post" name="testform">
-Encrypt: <input type="text" name="pass" />
-<input type="submit" name="submit" value="Submit" />
+String: <input type="text" name="string" /><br />
+Hash: <input type="text" name="hash" /><br />
+<input type="submit" name="submit" value="Compare" />
 </form>
 </center>
 
@@ -20,10 +21,15 @@ Encrypt: <input type="text" name="pass" />
 <?php
 
 require 'lib/password.php';
-$password = $_POST['pass'];
+$string = $_POST['string'];
+$subhash = $_POST['hash'];
 
-$hash = password_hash($password, PASSWORD_BCRYPT);
 
-echo " $hash ";
+if ( password_verify($string, $subhash)) {
+echo "Yes";
+}
+else {
+echo "No";
+}
 
 ?>
