@@ -40,9 +40,9 @@ elseif ($row['locked'] == "no") {
   echo "</tr>";
   }
 echo "</table>";
-echo "<a style=\"margin-left:45%;\" href=\"user.php\">Refresh Table</a>";
-echo "<center class=\"right\">Red: More than 5 days since last login.<br />
-Green: Less than  2 days since last login.
-</center>";
+//echo "<a style=\"margin-left:75%;margin-bottom:50%;\" href=\"user.php\">Refresh Table</a>";
+//echo "<center class=\"right\">Red: More than 5 days since last login.<br />
+//Green: Less than 5 days since last login.
+//</center>";
 mysql_close($con);
 ?>

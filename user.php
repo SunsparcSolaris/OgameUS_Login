@@ -116,6 +116,10 @@ echo '';
 <?php
 require 'table.php';
 ?>
+<p style="margin-left:75%;"><a href="user.php">Refresh Table</a></p>
+<center><p>Red: More than 5 days since last login.
+Green: Less than 5 days since last login.</p>
+</center>
 
 </body>
 </html>
