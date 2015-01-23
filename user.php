@@ -70,7 +70,6 @@ Email: <input type="text" size="16" name="email" />
 <h3>Edit User</h3>
 <div>
 <form action="#" method="post" name="editform">
-<!-- Username: <input type="text" size="16" name="editusr" />*/ -->
 Username: <select name="editselect">
 <option value=""></option>
 <?php
@@ -83,10 +82,11 @@ echo "<option value=\"" . $row['usr'] . "\"> " . $row['usr'] . "</option>  ";
 mysql_close($con);
 ?>
 </select>
-Choose which to change:
+Change:
 <input type="radio" name="editchoice" value="role" />Role
 <input type="radio" name="editchoice" value="uni" />Uni
-<input type="radio" name="editchoice" value="email" />Email <br />
+<input type="radio" name="editchoice" value="email" />Email
+<input type="radio" name="editchoice" value="lock" />Lock <br />
 Insert change: <input type="text" size="16" name="edittext" />
 <input type="submit" name="submit" value="Edit User" />
 <input type="hidden" name="submitbutton" value="editusrbutton" />
@@ -134,7 +134,6 @@ require 'connect.php';
 require './lib/password.php';
 require 'rdmpwgen.php';
 $usr = mysql_real_escape_string($_POST['addusr']);
-/*$pass = mysql_real_escape_string($_POST['addpass']);*/
 $pass = rand_string(5);
 $encpass = password_hash($pass, PASSWORD_BCRYPT);
 $role = $_POST['role'];
@@ -192,15 +191,18 @@ mysql_query("UPDATE login SET role = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User role updated!";
 }
 elseif ($editusr == $query['usr'] && $editchoice == "uni") {
-mysql_query("UPDATE login SET uni = '{$edittext}', locked = 'no' WHERE usr = '{$editusr}'");
+mysql_query("UPDATE login SET uni = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User uni pages updated!";
 }
 elseif ($editusr == $query['usr'] && $editchoice == "email") {
-mysql_query("UPDATE login SET email = '{$edittext}', locked = 'no' WHERE usr = '{$editusr}'");
+mysql_query("UPDATE login SET email = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User email address updated!";
 }
+elseif ($editusr == $query['usr'] && $editchoice == "lock") {
+mysql_query("UPDATE login SET locked = '{$edittext}' WHERE usr = '{$editusr}'");
+echo "<br />User account locked!";
 }
-
+}
 mysql_close($con);
 ?>
 
