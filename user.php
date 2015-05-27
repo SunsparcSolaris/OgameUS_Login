@@ -43,7 +43,7 @@ center.right {float: right; margin-right:325px;}
 <center><a href="portal.php">Back To Portal Page</a></center>
 <?php
 $usr = $_SESSION['usr'];
-echo " <center><h3>$usr - Add/Remove Users</h3</center> ";
+echo " <center><h3>$usr - Manage Users</h3</center> ";
 ?>
 
 <?php
