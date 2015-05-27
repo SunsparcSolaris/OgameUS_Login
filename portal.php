@@ -14,8 +14,10 @@ $uni = "all";
 }
 
 if ($loggedin !== "1") {
-   print " <center><h1>You must log in first.<br />Redirecting to Login page...</h1></center> ";
-	echo "<meta http-equiv='refresh' content='3,url=index.php'>";
+   echo "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"design.css\" /></head>
+<br /><br /><br /<br /><br /><br /><br /><br />
+<body class=\"portal\"> <center><h1>You must log in first.<br />Redirecting to Login page...</h1></center></body></html> ";
+	echo "<meta http-equiv='refresh' content='4,url=index.php'>";
 	exit();
 }
 ?>
@@ -137,20 +139,15 @@ mysql_close($con);
 <div id="sidebar">
 GO Links: <br />
 <ul>
-<li><a href="https://coma.gameforge.com/index.php" target="_blank">COMA Tool</a></li>
-<li><a href="https://game.mx.gfsrv.net/" target="_blank">Webmail</a></li>
-<li><a href="http://ogame.ksenior.net/CrazyTom/" target="_blank">CrazyTom Tools</a></li>
-<li><a href="http://www.miraclesalad.com/webtools/md5.php" target="_blank">MD5 Hash</a></li>
-<li><a href="calendar/">Training Calendar</a></li>
+<?php include 'links1.php';
+?>
 </ul>
 </div>
 <div id="rightbar">
 GO Guides:
 <ul>
-<li><a href="http://board.ogame.us/board174-news/board175-the-game/51895-new-ogame-us-rules-effective-17th-sept-2012/" target="_blank">OgameUS Rules</a></li>
-<li><a href="http://board.ogame.us/board27-team-section/board247-go-lair/board254-go-tools/42933-new-go-guide/" target="_blank">GO Guide</a></li>
-<li><a href="http://board.ogame.us/board27-team-section/board247-go-lair/board254-go-tools/61973-at-note-guide/" target="_blank">AT Note Guide</a></li>
-<li><a href="http://ogame.gamestats.org/?lang=us" target="_blank">Ogame Stats</a></li>
+<?php include 'links1.php';
+?>
 </ul>
 </div>
 
