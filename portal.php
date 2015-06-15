@@ -90,7 +90,7 @@ echo "<td>$fetch</td></tr>";
 }
 }
 
-/*
+
 elseif($uni !== "all") {
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
@@ -104,7 +104,7 @@ echo "<td>$fetch</td></tr>";
 }
 }
 }
-*/
+
 
 elseif ( $role == 'go' ) {
 if (!empty($uni)) {
