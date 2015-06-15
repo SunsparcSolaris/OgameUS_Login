@@ -57,12 +57,13 @@ echo "<a href=\"user.php\">Manage Users</a> |";
 ?>
 </u></center><br />
 
+</div><div id="maindiv">
+
 <?php
 
 $currentunis = file_get_contents('./currentunis');
 $currentunis = explode(',', $currentunis);
 if ( $role == 'ga' ) {
-echo "</div><div id=\"maindiv\">";
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run (EST)</th><span class=\"td\">";
 foreach($currentunis as $page) {
@@ -72,13 +73,10 @@ $fetch = mysql_fetch_array($sql);
 $fetch = $fetch['run_end'];
 echo "<td>$fetch</td></tr>";
 }
-echo "</span></center></table>";
 }
 }
-
 
 elseif ( $role == 'sgo' ) {
-echo "</div><div id=\"maindiv\">";
 if ($uni == "all") {
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
@@ -89,9 +87,10 @@ $fetch = mysql_fetch_array($sql);
 $fetch = $fetch['run_end'];
 echo "<td>$fetch</td></tr>";
 }
-echo "</span></center></table>";
 }
 }
+
+/*
 elseif($uni !== "all") {
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
@@ -102,15 +101,12 @@ $fetch = mysql_fetch_array($sql);
 $fetch = $fetch['run_end'];
 echo "<td>$fetch</td></tr>";
 }
-echo "</span></center></table>";
 }
 }
 }
-
+*/
 
 elseif ( $role == 'go' ) {
-echo "</div><div id=\"maindiv\">";
-if (!empty($uni)) {
 if (!empty($uni)) {
 echo "<center><table border=\"0\" class=\"padded\"><th>Universe</th><th>Last Run</th><span class=\"td\">";
 foreach($uni as $page) {
@@ -120,7 +116,6 @@ $fetch = mysql_fetch_array($sql);
 $fetch = $fetch['run_end'];
 echo "<td>$fetch</td></tr>";
 }
-echo "</span></center></table>";
 }
 }
 
@@ -129,13 +124,15 @@ echo " <center>No universes to display.</center> ";
 }
 }
 
-
 else {
 print " <center><h1>Access Denied</h1></center> ";
 }
 mysql_close($con);
 ?>
+
+</span></center></table>
 </div>
+
 <div id="sidebar">
 GO Links: <br />
 <ul>
