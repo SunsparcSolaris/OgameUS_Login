@@ -6,7 +6,7 @@
 <body class="chgpass">
 
 <center><img src="img/portal-logo.png" alt="OgameUS Script Portal" /></center>
-<center><a href="portal.php">Back to Portal Page</a><br /><center>
+<center><a href="index.php">Back to Login Page</a><br /><center>
 </center>
 <div>
 <center>
