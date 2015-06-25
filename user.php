@@ -86,7 +86,7 @@ Change:
 <input type="radio" name="editchoice" value="role" />Role
 <input type="radio" name="editchoice" value="uni" />Uni
 <input type="radio" name="editchoice" value="email" />Email
-<input type="radio" name="editchoice" value="lock" />Lock <br />
+<input type="radio" name="editchoice" value="lock" />(Un)Lock <br />
 Insert change: <input type="text" size="16" name="edittext" />
 <input type="submit" name="submit" value="Edit User" />
 <input type="hidden" name="submitbutton" value="editusrbutton" />
@@ -174,12 +174,12 @@ echo "Username not found in database!";
 }
 
 
-if ($actiontype = "editusrbutton") {
+if ($actiontype == "editusrbutton") {
 require 'connect.php';
 $editusr = $_POST['editselect'];
 $edittext = $_POST['edittext'];
 $editchoice = $_POST['editchoice'];
-$filter = mysql_query("SELECT usr,role,uni,email FROM login WHERE usr='{$editusr}'");
+$filter = mysql_query("SELECT usr,locked FROM login WHERE usr='{$editusr}'");
 $query = mysql_fetch_array($filter);
 
 if ($query['role'] == "ga") {
@@ -199,8 +199,14 @@ mysql_query("UPDATE login SET email = '{$edittext}' WHERE usr = '{$editusr}'");
 echo "<br />User email address updated!";
 }
 elseif ($editusr == $query['usr'] && $editchoice == "lock") {
-mysql_query("UPDATE login SET locked = '{$edittext}' WHERE usr = '{$editusr}'");
+if ( $query['locked'] == 'no' ) {
+mysql_query("UPDATE login SET locked = 'yes' WHERE usr = '{$editusr}'");
 echo "<br />User account locked!";
+}
+else {
+mysql_query("UPDATE login SET locked = 'no' WHERE usr = '{$editusr}'");
+echo "<br />User account unlocked!";
+}
 }
 }
 mysql_close($con);
