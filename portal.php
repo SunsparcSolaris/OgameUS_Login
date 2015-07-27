@@ -146,7 +146,7 @@ GO Links: <br />
 <div id="rightbar">
 GO Guides:
 <ul>
-<?php include 'links1.php';
+<?php include 'links2.php';
 ?>
 </ul>
 </div>
