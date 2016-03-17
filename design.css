@@ -101,10 +101,10 @@ background-repeat: repeat-y;
 background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
-width: 13%;
+width: 12%;
 float: left;
 margin-left:25%;
-margin-top:-250px;
+margin-top:-300px;
 padding-left:20px;
 padding-bottom:33px;
 }
@@ -118,10 +118,10 @@ background-repeat: repeat-y;
 background-position: center;
 border: 1px solid #252525;
 padding-top: 20px;
-width: 13%;
+width: 12%;
 float: right;
 margin-right:25%;
-margin-top:-250px;
+margin-top:-300px;
 padding-left:20px;
 padding-bottom:33px;
 }
